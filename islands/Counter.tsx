@@ -1,7 +1,6 @@
 import { useState } from "preact/hooks";
 import type { ComponentProps } from "preact";
 import axiod from "axiod";
-import { JSX } from "preact/jsx-runtime";
 
 interface CounterProps {
   src: string;
