@@ -6,6 +6,8 @@ import { JSX } from "preact/jsx-runtime";
 interface CounterProps {
   src: string;
   count: number;
+  name: string;
+  href: string;
 }
 
 export default function Counter(props: CounterProps) {
@@ -33,7 +35,7 @@ export default function Counter(props: CounterProps) {
   return (
     <div class="flex gap-2 w-full">
       <p class="flex-grow-1 font-bold text-xl capitalize">
-        {props.src}: {count}
+        <a href={props.href}>{props.name}</a>: {count}
       </p>
       <Button disabled={loading} onClick={() => saveCount(count - 1)}>
         -1

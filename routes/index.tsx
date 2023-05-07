@@ -35,12 +35,27 @@ export default function Home({ data }: PageProps<Data>) {
           alt="the fresh logo: a sliced lemon dripping with juice"
         />
 
-        <Counter src="roach" count={data.roach} />
-        <Counter src="turso" count={data.turso} />
-        <Counter src="neon" count={data.neon} />
+        <Counter
+          src="roach"
+          count={data.roach}
+          name="CockroachDB"
+          href="https://www.cockroachlabs.com"
+        />
+        <Counter
+          src="turso"
+          count={data.turso}
+          name="Turso"
+          href="https://turso.tech"
+        />
+        <Counter
+          src="neon"
+          count={data.neon}
+          name="Neon"
+          href="https://neon.tech"
+        />
 
         <a
-          class="block text-center mx-auto my-5"
+          class="block text-center mx-auto"
           href="https://github.com/majudhu/fresh-multi-db"
           target="_blank"
         >
