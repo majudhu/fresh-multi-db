@@ -1,5 +1,7 @@
 import { useState } from "preact/hooks";
+import type { ComponentProps } from "preact";
 import axiod from "axiod";
+import { JSX } from "preact/jsx-runtime";
 
 interface CounterProps {
   src: string;
@@ -33,27 +35,24 @@ export default function Counter(props: CounterProps) {
       <p class="flex-grow-1 font-bold text-xl capitalize">
         {props.src}: {count}
       </p>
-      <button
-        disabled={loading}
-        className="bg-gray-700 text-white disabled:opacity-50 px-4"
-        onClick={() => saveCount(count - 1)}
-      >
+      <Button disabled={loading} onClick={() => saveCount(count - 1)}>
         -1
-      </button>
-      <button
-        disabled={loading}
-        className="bg-gray-700 text-white disabled:opacity-50 px-4"
-        onClick={() => saveCount(count + 1)}
-      >
+      </Button>
+      <Button disabled={loading} onClick={() => saveCount(count + 1)}>
         +1
-      </button>
-      <button
-        disabled={loading}
-        className="bg-gray-700 text-white disabled:opacity-50 px-4"
-        onClick={reload}
-      >
+      </Button>
+      <Button disabled={loading} onClick={reload}>
         ↺
-      </button>
+      </Button>
     </div>
   );
 }
+
+const Button = (props: ComponentProps<"button">) => (
+  <button
+    className="bg-gray-700 text-white disabled:opacity-50 px-4 hover:bg-gray-600"
+    {...props}
+  >
+    {props.children}
+  </button>
+);

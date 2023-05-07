@@ -1,5 +1,7 @@
 # fresh project
 
+[live on deno deploy](https://majudhu-fresh-multi-db.deno.dev)
+
 ### Usage
 
 Start the project:
