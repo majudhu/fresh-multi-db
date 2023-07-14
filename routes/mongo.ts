@@ -15,7 +15,9 @@ export const handler: Handlers = {
   async POST(req) {
     const db = await connect();
     const data = await req.json();
-    await db.collection("count").updateOne({}, { count: +data.count });
+    await db.collection("count").updateOne({}, {
+      "$set": { count: +data.count },
+    });
     return new Response("", { status: 201 });
   },
 };
