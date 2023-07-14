@@ -4,21 +4,24 @@ import Counter from "../islands/Counter.tsx";
 import { pool as roachPool } from "../utils/roach.ts";
 import { db as tursoDb } from "../utils/turso.ts";
 import { pool as neonPool } from "../utils/neon.ts";
+import { connect as mongoConnect } from "../utils/mongo.ts";
 
 interface Data {
   roach: number;
   turso: number;
   neon: number;
+  mongo: number;
 }
 
 export const handler: Handlers<Data> = {
   async GET(_, ctx) {
-    const [roach, turso, neon] = await Promise.all([
+    const [roach, turso, neon, mongo] = await Promise.all([
       getRoachCount(),
       getTursoCount(),
       getNeonCount(),
+      getMongoCount(),
     ]);
-    return ctx.render({ roach, turso, neon });
+    return ctx.render({ roach, turso, neon, mongo });
   },
 };
 
@@ -52,6 +55,12 @@ export default function Home({ data }: PageProps<Data>) {
           count={data.neon}
           name="Neon"
           href="https://neon.tech"
+        />
+        <Counter
+          src="mongo"
+          count={data.mongo}
+          name="MongoDb Atlas"
+          href="https://www.mongodb.com"
         />
 
         <a
@@ -107,4 +116,10 @@ async function getNeonCount() {
   >`SELECT id,count FROM count LIMIT 1`;
   connection.release();
   return Number(rows[0].count);
+}
+
+async function getMongoCount() {
+  const db = await mongoConnect();
+  const { count } = await db.collection("count").findOne({});
+  return count as number;
 }
